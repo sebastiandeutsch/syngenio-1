@@ -1,24 +1,44 @@
-import logo from './logo.svg';
+import SayHi from './SayHi';
+import ShoppingList from './ShoppingList';
+import HelloWorld from './HelloWorld';
+import Button from './Button';
+import Counter from './Counter';
+
 import './App.css';
 
 function App() {
+  const articles = [
+    {
+      id: 1,
+      name: "Cola",
+      isBought: false
+    },
+    {
+      id: 2,
+      name: "Mate",
+      isBought: true
+    },
+    {
+      id: 3,
+      name: "Bier",
+      isBought: false
+    }
+  ];
+
+  const handleButtonClick = (event) => {
+    alert("clicked");
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <Counter />
+      <HelloWorld greet="World!!!11elf" />
+      <Button onClick={handleButtonClick} >
+        Submit 🙂
+      </Button>
+      <SayHi />
+      <ShoppingList articles={articles} />
+    </>
   );
 }
 
