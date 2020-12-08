@@ -2,8 +2,6 @@ import SayHi from './SayHi';
 import ShoppingList from './ShoppingList';
 import HelloWorld from './HelloWorld';
 import Button from './Button';
-import Counter from './Counter';
-import Clock from './Clock';
 
 import './App.css';
 
@@ -32,8 +30,6 @@ function App() {
 
   return (
     <>
-      <Clock />
-      <Counter />
       <HelloWorld greet="World!!!11elf" />
       <Button onClick={handleButtonClick} >
         Submit 🙂

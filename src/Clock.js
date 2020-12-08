@@ -6,6 +6,7 @@ export default class Clock extends Component {
   }
 
   tick = () => {
+    console.log('tick');
     this.setState({ date: new Date() })
   }
 
