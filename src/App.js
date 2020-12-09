@@ -1,4 +1,6 @@
 import ShoppingList from './ShoppingList';
+import ArticleForm from './ArticleForm';
+
 import { useState } from 'react';
 
 import './App.css';
@@ -10,26 +12,30 @@ function App() {
     {
       id: id++,
       name: "Cola",
+      amount: 2,
       isBought: false
     },
     {
       id: id++,
       name: "Mate",
+      amount: 5,
       isBought: true
     },
     {
       id: id++,
       name: "Bier",
+      amount: 24,
       isBought: false
     }
   ]);
 
-  const handleAddArticle = (text) => {
+  const handleAddArticle = (text, amount) => {
     setArticles([
       ...articles,
       {
         id: id++,
         name: text,
+        amount: amount,
         isBought: false
       }
     ]);
@@ -60,9 +66,12 @@ function App() {
     <>
       <ShoppingList
         articles={articles}
-        onAddArticle={handleAddArticle}
+
         onBoughtArticle={handleBoughtArticle}
         onDeleteArticle={handleDeleteArticle}
+      />
+      <ArticleForm
+        onAddArticle={handleAddArticle}
       />
     </>
   );
