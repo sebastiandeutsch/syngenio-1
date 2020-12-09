@@ -1,41 +1,69 @@
-import SayHi from './SayHi';
 import ShoppingList from './ShoppingList';
-import HelloWorld from './HelloWorld';
-import Button from './Button';
+import { useState } from 'react';
 
 import './App.css';
 
+let id = 1;
+
 function App() {
-  const articles = [
+  const [articles, setArticles] = useState([
     {
-      id: 1,
+      id: id++,
       name: "Cola",
       isBought: false
     },
     {
-      id: 2,
+      id: id++,
       name: "Mate",
       isBought: true
     },
     {
-      id: 3,
+      id: id++,
       name: "Bier",
       isBought: false
     }
-  ];
+  ]);
 
-  const handleButtonClick = (event) => {
-    alert("clicked");
+  const handleAddArticle = (text) => {
+    setArticles([
+      ...articles,
+      {
+        id: id++,
+        name: text,
+        isBought: false
+      }
+    ]);
   };
+
+  const handleBoughtArticle = (id) => {
+    const newArticles = articles.map((article) => {
+      if(article.id === id) {
+        return {
+          ...article,
+          isBought: !article.isBought
+        };
+      } else {
+        return article;
+      }
+    });
+    setArticles(newArticles);
+  };
+
+  const handleDeleteArticle = (id) => {
+    const newArticles = articles.filter((article) => {
+      return article.id !== id;
+    });
+    setArticles(newArticles);
+  }
 
   return (
     <>
-      <HelloWorld greet="World!!!11elf" />
-      <Button onClick={handleButtonClick} >
-        Submit 🙂
-      </Button>
-      <SayHi />
-      <ShoppingList articles={articles} />
+      <ShoppingList
+        articles={articles}
+        onAddArticle={handleAddArticle}
+        onBoughtArticle={handleBoughtArticle}
+        onDeleteArticle={handleDeleteArticle}
+      />
     </>
   );
 }

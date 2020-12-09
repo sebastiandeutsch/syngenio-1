@@ -1,7 +1,17 @@
 import PropTypes from 'prop-types';
+import { useState } from 'react';
 
 const ShoppingList = (props) => {
-  const { articles, headline } = props;
+  const { articles, headline, onAddArticle, onBoughtArticle, onDeleteArticle } = props;
+  const [text, setText] = useState("Ich bin neu");
+
+  const handleButtonClick = () => {
+    onAddArticle(text);
+  };
+
+  const handleDeleteButtonClick = (id) => {
+    onDeleteArticle(id);
+  };
 
   return (
     <div>
@@ -9,12 +19,26 @@ const ShoppingList = (props) => {
       <ul>
         {articles.map(item => (
           <li key={item.id}>
-            {item.name}
-            &nbsp;
-            {item.isBought && <span>(gekauft)</span>}
+            <span onClick={() => { onBoughtArticle(item.id) }}>
+              {item.name}
+              &nbsp;
+              {item.isBought && <span>(gekauft)</span>}
+            </span>
+            <button onClick={() => { handleDeleteButtonClick(item.id) }}>
+              -
+            </button>
           </li>
         ))}
       </ul>
+      <div>
+        <input
+          type="text"
+          value={text}
+          onChange={(event) => { setText(event.target.value) }} />
+        <button onClick={handleButtonClick}>
+          hinzufügen
+        </button>
+      </div>
     </div>
   );
 }
